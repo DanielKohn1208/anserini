@@ -16,6 +16,8 @@
 
 package io.anserini.search;
 
+import java.util.Comparator;
+
 import org.apache.lucene.document.Document;
 
 /**
@@ -33,4 +35,25 @@ public class ScoredDoc {
     this.score = score;
     this.lucene_document = lucene_document;
   }
+
+  public static class ScoredDocScoreComparator implements Comparator<ScoredDoc>{
+    @Override
+    public int compare(ScoredDoc o1, ScoredDoc o2) {
+      if(o1.score > o2.score) {
+        return 1;
+      } if (o2.score < o1.score) {
+        return -1;
+      } else {
+        return 0;
+      }
+    }
+  }
+
+  public class ScoredDocIdComparator implements Comparator<ScoredDoc> {
+    @Override
+    public int compare(ScoredDoc o1, ScoredDoc o2) {
+      return o1.docid.compareTo(o2.docid); 
+    }
+  }
 }
+

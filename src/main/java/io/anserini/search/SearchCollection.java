@@ -1400,7 +1400,8 @@ public final class SearchCollection<K extends Comparable<K>> implements Runnable
 
     // We're at top-level already inside a main; makes no sense to propagate exceptions further, so reformat the
     // exception messages and display on console.
-    try(SearchCollection<?> searcher = new SearchCollection<>(searchArgs)) {
+    try {
+      SearchCollection<?> searcher = new SearchCollection<>(searchArgs);
       searcher.run();
     } catch (IllegalArgumentException e) {
       System.err.printf("Error: %s\n", e.getMessage());
